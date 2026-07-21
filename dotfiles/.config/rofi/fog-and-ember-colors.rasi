@@ -1,0 +1,16 @@
+* {
+  base: #11141a;
+  base-alpha: #11141af5;
+  surface: #1a1e27;
+  surface-alpha: #1a1e27eb;
+  surface2: #252b35;
+  text: #e5e2da;
+  muted: #89939e;
+  accent: #7895a6;
+  accent2: #bf8950;
+  accent-soft: #7895a629;
+  border: #89939e4d;
+  success: #82a184;
+  warning: #d0a35d;
+  critical: #cf6c73;
+}

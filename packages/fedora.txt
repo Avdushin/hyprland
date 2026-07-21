@@ -1,0 +1,73 @@
+# Hyprland ecosystem comes from the upstream-recommended lionheartp/Hyprland COPR.
+hyprland
+hyprlock
+hypridle
+hyprpolkitagent
+xdg-desktop-portal-hyprland
+
+# Core desktop
+xorg-x11-server-Xwayland
+waybar
+alacritty
+rofi
+wofi
+mako
+xdg-desktop-portal
+xdg-desktop-portal-gtk
+
+# File manager and desktop integration
+Thunar
+thunar-volman
+tumbler
+gvfs
+gvfs-mtp
+udisks2
+
+# Wallpaper, screenshots and clipboard
+swaybg
+grim
+slurp
+wl-clipboard
+cliphist
+
+# Audio, networking and controls
+pipewire
+wireplumber
+pipewire-alsa
+pipewire-pulseaudio
+pavucontrol
+playerctl
+NetworkManager
+NetworkManager-applet
+bluez
+blueman
+brightnessctl
+polkit
+libnotify
+
+# Appearance and fonts
+papirus-icon-theme
+papirus-icon-theme-dark
+jetbrains-mono-fonts
+cascadia-mono-nf-fonts
+fontawesome-fonts-all
+
+# Runtime dependencies
+bash
+coreutils
+findutils
+gawk
+grep
+sed
+util-linux
+procps-ng
+psmisc
+file
+jq
+python3
+rsync
+git
+curl
+xdg-utils
+xdg-user-dirs
+dbus-tools

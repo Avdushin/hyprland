@@ -1,0 +1,8 @@
+# Optional features. The desktop remains usable without these packages.
+rofi-calc
+rofi-emoji
+btop
+nwg-look
+qt5ct
+qt6ct
+kvantum

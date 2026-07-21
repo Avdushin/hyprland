@@ -1,0 +1,74 @@
+# Compositor and Wayland session
+hyprland
+xorg-xwayland
+waybar
+alacritty
+rofi
+wofi
+mako
+hyprlock
+hypridle
+hyprpolkitagent
+xdg-desktop-portal
+xdg-desktop-portal-hyprland
+xdg-desktop-portal-gtk
+
+# File manager and desktop integration
+thunar
+thunar-volman
+tumbler
+gvfs
+gvfs-mtp
+udisks2
+
+# Wallpaper, screenshots and clipboard
+swaybg
+grim
+slurp
+wl-clipboard
+cliphist
+
+# Audio, networking and controls
+pipewire
+wireplumber
+pipewire-alsa
+pipewire-pulse
+pavucontrol
+playerctl
+networkmanager
+network-manager-applet
+bluez
+bluez-utils
+blueman
+brightnessctl
+polkit
+libnotify
+
+# Appearance and fonts
+materia-gtk-theme
+papirus-icon-theme
+noto-fonts
+noto-fonts-emoji
+ttf-jetbrains-mono
+ttf-jetbrains-mono-nerd
+ttf-font-awesome
+
+# Runtime dependencies
+bash
+coreutils
+findutils
+gawk
+grep
+sed
+util-linux
+procps-ng
+psmisc
+file
+jq
+python
+rsync
+git
+curl
+xdg-utils
+xdg-user-dirs
+dbus

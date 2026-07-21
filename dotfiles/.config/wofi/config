@@ -1,0 +1,14 @@
+show=drun
+width=30%
+lines=8
+prompt=
+layer=overlay
+location=center
+halign=center
+allow_images=true
+image_size=24
+insensitive=true
+matching=fuzzy
+filter_rate=100
+dynamic_lines=false
+threading=false

@@ -1,0 +1,12 @@
+.config/hypr
+.config/waybar
+.config/alacritty
+.config/rofi
+.config/wofi
+.config/mako
+.config/Thunar
+.config/xfce4/helpers.rc
+.config/gtk-3.0/settings.ini
+.config/gtk-4.0/settings.ini
+.config/systemd/user/waybar-fog-and-ember.service
+.local/share/fog-and-ember

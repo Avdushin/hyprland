@@ -1,0 +1,22 @@
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+.env
+.env.*
+!.env.example
+
+_exports/
+*.zip
+*.tar.gz
+*.tar.zst
+
+**/__pycache__/
+**/*.pyc
+**/.cache/
+
+# Machine-local overrides and generated runtime state.
+dotfiles/.config/hypr/user/local.lua
+dotfiles/.config/hypr/monitors/local.lua

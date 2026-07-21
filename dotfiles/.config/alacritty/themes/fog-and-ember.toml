@@ -1,0 +1,69 @@
+# Fog & Ember / «Туман и янтарь»
+
+[colors.primary]
+background = "#1B222C"
+foreground = "#EAE6DD"
+bright_foreground = "#F3F0E8"
+dim_foreground = "#B8B8B2"
+
+[colors.cursor]
+cursor = "#7895A6"
+text = "#11141A"
+
+[colors.vi_mode_cursor]
+cursor = "#BF8950"
+text = "#11141A"
+
+[colors.selection]
+background = "#3B4854"
+text = "#F3F0E8"
+
+[colors.normal]
+black = "#303946"
+red = "#CF6C73"
+green = "#82A184"
+yellow = "#D0A35D"
+blue = "#86A5B6"
+magenta = "#A7849B"
+cyan = "#8DAFB1"
+white = "#D5D4CE"
+
+[colors.bright]
+black = "#727D89"
+red = "#E1848A"
+green = "#9DB79F"
+yellow = "#E3BD75"
+blue = "#94AEBB"
+magenta = "#C09AAF"
+cyan = "#9AB8BA"
+white = "#F3F0E8"
+
+[colors.dim]
+black = "#1A1E27"
+red = "#A8565D"
+green = "#687F6A"
+yellow = "#A5834B"
+blue = "#607887"
+magenta = "#86697C"
+cyan = "#668284"
+white = "#9A9D9C"
+
+[colors.search.matches]
+background = "#59616C"
+foreground = "#F3F0E8"
+
+[colors.search.focused_match]
+background = "#BF8950"
+foreground = "#11141A"
+
+[colors.hints.start]
+background = "#D0A35D"
+foreground = "#11141A"
+
+[colors.hints.end]
+background = "#7895A6"
+foreground = "#11141A"
+
+[colors.footer_bar]
+background = "#252B35"
+foreground = "#EAE6DD"

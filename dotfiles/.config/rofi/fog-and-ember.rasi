@@ -1,0 +1,102 @@
+@import "fog-and-ember-colors.rasi"
+
+configuration {
+  modi: "drun,run,window";
+  show-icons: true;
+  display-drun: "Applications";
+  drun-display-format: "{name}";
+  font: "JetBrains Mono 12";
+  location: 0;
+}
+
+* {
+  background-color: transparent;
+  text-color: @text;
+  spacing: 0;
+}
+
+window {
+  width: 620px;
+  border: 1px;
+  border-color: @border;
+  border-radius: 16px;
+  background-color: @base-alpha;
+  padding: 14px;
+}
+
+mainbox {
+  children: [inputbar, message, listview];
+  spacing: 10px;
+}
+
+inputbar {
+  children: [prompt, entry];
+  background-color: @surface-alpha;
+  border: 1px;
+  border-color: @border;
+  border-radius: 11px;
+  padding: 11px 14px;
+  spacing: 10px;
+}
+
+prompt {
+  text-color: @accent2;
+}
+
+entry {
+  placeholder: "Search…";
+  placeholder-color: @muted;
+}
+
+message {
+  background-color: @surface-alpha;
+  border-radius: 10px;
+  padding: 8px 12px;
+}
+
+listview {
+  lines: 8;
+  columns: 1;
+  fixed-height: false;
+  scrollbar: false;
+  spacing: 4px;
+}
+
+element {
+  border: 0px;
+  border-radius: 9px;
+  padding: 9px 11px;
+  spacing: 11px;
+}
+
+element normal.normal,
+element alternate.normal {
+  background-color: transparent;
+  text-color: @text;
+}
+
+element selected.normal,
+element selected.active {
+  background-color: @surface2;
+  text-color: @text;
+  border: 0px 0px 0px 3px;
+  border-color: @accent;
+  padding: 9px 11px 9px 8px;
+}
+
+element selected.urgent {
+  background-color: @surface2;
+  text-color: @critical;
+  border: 0px 0px 0px 3px;
+  border-color: @critical;
+}
+
+element-icon {
+  size: 24px;
+  background-color: transparent;
+}
+
+element-text {
+  vertical-align: 0.5;
+  background-color: transparent;
+}

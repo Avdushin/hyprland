@@ -1,0 +1,17 @@
+@define-color base #0f151b;
+@define-color surface #151d24;
+@define-color surface2 #202a32;
+@define-color text #dce4e2;
+@define-color muted #7f8d92;
+@define-color accent #9bbebb;
+@define-color accent2 #bf8950;
+@define-color cpu #8fbfbd;
+@define-color memory #d2b48c;
+@define-color bluetooth #91a9ce;
+@define-color vpn_idle #a49bad;
+@define-color audio #d2aa78;
+@define-color headset #9fbd91;
+@define-color network #84b8c2;
+@define-color success #91b695;
+@define-color warning #d7aa61;
+@define-color critical #d9787d;

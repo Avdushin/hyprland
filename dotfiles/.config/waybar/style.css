@@ -1,0 +1,97 @@
+@import "colors.css";
+
+* {
+  border: none;
+  border-radius: 0;
+  font-family: "JetBrains Mono", "Cascadia Mono NF", "Font Awesome 6 Free", sans-serif;
+  font-size: 12px;
+  min-height: 0;
+}
+
+window#waybar {
+  background: transparent;
+  color: @text;
+}
+
+.modules-left,
+.modules-center,
+.modules-right {
+  background: alpha(@base, 0.94);
+  border: 1px solid alpha(@muted, 0.28);
+  border-radius: 13px;
+  box-shadow: 0 5px 16px alpha(black, 0.28);
+}
+
+#workspaces,
+#clock,
+#mpris,
+#cpu,
+#memory,
+#custom-language,
+#bluetooth,
+#pulseaudio,
+#network,
+#tray,
+#custom-power {
+  padding: 0 10px;
+  margin: 0;
+  color: @text;
+}
+
+#workspaces {
+  padding: 0 5px;
+}
+
+#workspaces button {
+  color: @muted;
+  background: transparent;
+  border-radius: 9px;
+  padding: 0 9px;
+  margin: 4px 1px;
+}
+
+#workspaces button.active {
+  color: @base;
+  background: @accent;
+}
+
+#workspaces button.urgent {
+  color: @base;
+  background: @critical;
+}
+
+#clock {
+  color: @text;
+  font-weight: 600;
+}
+
+#mpris {
+  color: @accent2;
+}
+
+#custom-language {
+  color: @accent;
+}
+
+#bluetooth.connected,
+#network.wifi,
+#network.ethernet {
+  color: @success;
+}
+
+#pulseaudio.muted,
+#network.disconnected {
+  color: @critical;
+}
+
+#custom-power {
+  color: @critical;
+  padding-right: 12px;
+}
+
+tooltip {
+  background: @base;
+  color: @text;
+  border: 1px solid alpha(@muted, 0.35);
+  border-radius: 10px;
+}
