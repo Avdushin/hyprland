@@ -1,35 +1,34 @@
-# Fog & Ember for Hyprland
+#  Hyprland - Fog & Ember 
 
-A portable, cohesive Hyprland desktop for **Arch Linux, EndeavourOS, Manjaro
-and Fedora**.
+Переносимая и цельная сборка рабочего окружения Hyprland для **Arch Linux, EndeavourOS, Manjaro и Fedora**.
 
-![Fog & Ember desktop](assets/demo/fog-and-ember-three-monitors.webp)
+![fetch](./assets/demo/fetch.png)
 
-The repository installs both the configuration and its desktop dependencies.
-A clean system does not need to have Hyprland, Waybar, Alacritty, Rofi, Wofi
-or Thunar preinstalled.
+![Рабочий стол Fog & Ember](assets/demo/fog-and-ember-three-monitors.webp)
 
-## Included
+![Рабочий стол Fog & Ember](assets/demo/rainy-house-three-monitors.webp)
 
-- Hyprland Lua configuration;
-- universal automatic monitor fallback plus local overrides;
-- Waybar;
-- Alacritty;
-- Rofi and Wofi;
-- Thunar integration;
-- Mako notifications;
-- Hyprlock and Hypridle;
-- screenshots with Grim, Slurp and wl-clipboard;
-- clipboard history with Cliphist;
-- PipeWire controls, NetworkManager and Bluetooth widgets;
-- GTK, icon, terminal and launcher colors generated from one **Fog & Ember**
-  palette;
-- backup, restore and diagnostics.
+Репозиторий устанавливает как саму конфигурацию, так и необходимые для неё компоненты рабочего окружения. На чистой системе не требуется заранее устанавливать Hyprland, Waybar, Alacritty, Rofi, Wofi или Thunar.
 
-GPU drivers, kernels, microcode, boot loaders, VPN profiles, browsers and
-personal applications are deliberately not managed.
+## Что входит в сборку
 
-## Install
+* конфигурация Hyprland на Lua;
+* универсальное автоматическое определение мониторов с возможностью локального переопределения;
+* Waybar;
+* Alacritty;
+* Rofi и Wofi;
+* интеграция с Thunar;
+* уведомления Mako;
+* Hyprlock и Hypridle;
+* создание скриншотов с помощью Grim, Slurp и wl-clipboard;
+* история буфера обмена через Cliphist;
+* управление PipeWire, виджеты NetworkManager и Bluetooth;
+* единая палитра **Fog & Ember**, из которой генерируются цвета GTK, иконок, терминала, лаунчеров и других компонентов;
+* резервное копирование, восстановление и диагностика.
+
+Драйверы видеокарты, ядра, микрокод, загрузчики, VPN-профили, браузеры и личные приложения намеренно не устанавливаются и не изменяются.
+
+## Установка
 
 ```bash
 git clone https://github.com/Avdushin/hyprland.git
@@ -37,80 +36,76 @@ cd hyprland
 ./install.sh
 ```
 
-The installer:
+Установщик:
 
-1. detects the supported distribution family;
-2. installs required packages;
-3. backs up existing managed configuration;
-4. installs dotfiles and wallpapers;
-5. generates theme fragments;
-6. enables relevant services;
-7. runs diagnostics.
+1. определяет поддерживаемое семейство дистрибутива;
+2. устанавливает необходимые пакеты;
+3. создаёт резервную копию существующих управляемых конфигураций;
+4. устанавливает dotfiles и обои;
+5. генерирует файлы цветовой темы;
+6. включает необходимые службы;
+7. запускает диагностику.
 
-Log out afterward and choose **Hyprland** in the display manager.
+После установки выйдите из текущей сессии и выберите **Hyprland** в менеджере входа.
 
-## Safe previews and partial installation
+## Предварительный просмотр и частичная установка
 
-Print package-manager actions without changing anything:
+Показать действия пакетного менеджера без внесения изменений:
 
 ```bash
 ./install.sh --dry-run
 ```
 
-Install only the files, after dependencies were installed manually:
+Установить только конфигурационные файлы, если зависимости уже были установлены вручную:
 
 ```bash
 ./install.sh --dotfiles-only
 ```
 
-Skip post-install diagnostics:
+Пропустить диагностику после установки:
 
 ```bash
 ./install.sh --no-doctor
 ```
 
-## Distribution notes
+## Поддержка дистрибутивов
 
-- Arch Linux, EndeavourOS and Manjaro use `pacman`.
-- Fedora uses the Hyprland COPR currently referenced by the upstream
-  installation documentation.
-- Other Linux distributions can use `--dotfiles-only`; their package managers
-  are not claimed as tested or automated.
+* Arch Linux, EndeavourOS и Manjaro используют `pacman`.
+* Fedora использует COPR-репозиторий Hyprland, указанный в актуальной документации проекта.
+* На других дистрибутивах можно использовать параметр `--dotfiles-only`, однако автоматическая установка через их пакетные менеджеры не заявлена как протестированная или поддерживаемая.
 
-Hyprland upstream officially guarantees first-class packaging support only for
-a limited set of distributions. This project therefore keeps distro logic
-isolated and avoids mixing manually built Hyprland ecosystem libraries with
-distribution packages.
+Разработчики Hyprland официально гарантируют полноценную поддержку пакетной установки только для ограниченного числа дистрибутивов. Поэтому логика установки для разных систем в этом проекте разделена, а библиотеки экосистемы Hyprland, собранные вручную, не смешиваются с пакетами дистрибутива.
 
-## Monitor layout
+## Настройка мониторов
 
-The default profile uses preferred modes and automatic placement. Create a
-local profile for exact geometry:
+Профиль по умолчанию использует предпочтительные режимы мониторов и автоматическое расположение.
+
+Для точной настройки разрешения, частоты обновления, масштаба и расположения создайте локальный профиль:
 
 ```bash
 cp ~/.config/hypr/monitors/local.lua.example \
    ~/.config/hypr/monitors/local.lua
 ```
 
-See [monitor documentation](docs/MONITORS.md).
+Подробнее: [настройка мониторов](docs/MONITORS.md).
 
-## Update
+## Обновление
 
 ```bash
 git pull --ff-only
 ./install.sh
 ```
 
-A new dated backup is created every time.
+При каждом запуске создаётся новая резервная копия с датой и временем.
 
-## Documentation
+## Документация
 
-- [Key bindings](docs/KEYBINDS.md)
-- [Monitor setup](docs/MONITORS.md)
-- [Distribution support](docs/DISTRIBUTIONS.md)
-- [Customization](docs/CUSTOMIZATION.md)
-- [Troubleshooting](docs/TROUBLESHOOTING.md)
+* [Горячие клавиши](docs/KEYBINDS.md)
+* [Настройка мониторов](docs/MONITORS.md)
+* [Поддержка дистрибутивов](docs/DISTRIBUTIONS.md)
+* [Настройка и персонализация](docs/CUSTOMIZATION.md)
+* [Решение проблем](docs/TROUBLESHOOTING.md)
 
-## License
+## Лицензия
 
 MIT
