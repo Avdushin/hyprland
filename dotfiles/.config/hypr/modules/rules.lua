@@ -36,11 +36,23 @@ hl.layer_rule({
   ignore_alpha = 0.25,
 })
 
+-- Keep transient Thunar dialogs independent from the tiled layout.
+hl.window_rule({
+  name = "thunar-modal-dialogs",
+  match = {
+    class = "^(thunar|Thunar)$",
+    modal = true,
+  },
+  float = true,
+  center = true,
+})
+
+-- Keep Thunar rename and name-entry dialogs compact.
 hl.window_rule({
   name = "thunar-rename-dialog",
   match = {
     class = "^(thunar|Thunar)$",
-    title = "^(Rename|Переименовать).*$",
+    title = "^(Rename|Переименовать|Введите имя).*$",
   },
   float = true,
   center = true,
