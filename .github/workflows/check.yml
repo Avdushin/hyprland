@@ -7,26 +7,10 @@ on:
 jobs:
   static:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
-      - name: Bash syntax
-        run: |
-          while IFS= read -r -d '' file; do
-            bash -n "$file"
-          done < <(find . -type f -name '*.sh' -print0)
-      - name: Structured files
-        run: |
-          python3 -m json.tool dotfiles/.config/waybar/config.jsonc >/dev/null
-          python3 - <<'PY'
-          import tomllib
-          import xml.etree.ElementTree as ET
-          with open("dotfiles/.config/alacritty/alacritty.toml", "rb") as fh:
-              tomllib.load(fh)
-          ET.parse("dotfiles/.config/Thunar/uca.xml")
-          PY
-          python3 -m py_compile dotfiles/.config/waybar/scripts/language.py
-      - name: Naming and path audit
-        run: |
-          ! git grep -nI -E 'Obsidian Aqua|obsidian-aqua|hypr-obsidian-aqua|aquaOut|aquaFast' -- \
-            ':!.github/workflows/check.yml' ':!scripts/doctor.sh' ':!scripts/check-repo.sh'
-          ! git grep -nI -E '/home/[A-Za-z0-9._-]+/'
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Repository checks
+        run: ./scripts/check-repo.sh

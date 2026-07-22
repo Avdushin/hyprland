@@ -71,3 +71,8 @@ curl
 xdg-utils
 xdg-user-dirs
 dbus-tools
+
+# Waybar utilities used by the Fog & Ember profile
+btop
+calcurse
+iproute

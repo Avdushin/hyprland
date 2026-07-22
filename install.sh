@@ -70,6 +70,17 @@ printf 'Backup: %s\n' "$backup"
 note 'Installing dotfiles'
 rsync -a -- "$script_dir/dotfiles/" "$HOME/"
 
+# Remove files used by older static Waybar builds. The current profile is
+# rendered into XDG_RUNTIME_DIR from config.template.json.
+rm -f -- "$HOME/.config/waybar/config.jsonc"
+
+find "$HOME/.config/waybar/scripts" \
+  -type d \
+  -name '__pycache__' \
+  -prune \
+  -exec rm -rf -- {} + \
+  2>/dev/null || true
+
 share_dir="$HOME/.local/share/fog-and-ember"
 mkdir -p "$share_dir"
 rsync -a --delete -- "$script_dir/assets/wallpapers/" "$share_dir/wallpapers/"

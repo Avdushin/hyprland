@@ -1,0 +1,513 @@
+[
+  {
+    "output": "@LEFT@",
+    "layer": "top",
+    "position": "top",
+    "height": 38,
+    "spacing": 0,
+    "margin-top": 7,
+    "margin-left": 9,
+    "margin-right": 9,
+    "modules-left": [
+      "hyprland/workspaces"
+    ],
+    "modules-center": [
+      "clock"
+    ],
+    "modules-right": [
+      "cpu#side",
+      "memory#side",
+      "custom/language",
+      "pulseaudio#side",
+      "network#side"
+    ],
+    "hyprland/workspaces": {
+      "all-outputs": false,
+      "disable-scroll": true,
+      "sort-by-number": true,
+      "format": "{icon}",
+      "format-icons": {
+        "0": "0",
+        "default": ""
+      },
+      "on-click": "activate",
+      "persistent-workspaces": {
+        "0": [
+          "@LEFT@"
+        ]
+      },
+      "expand": false,
+      "show-special": false
+    },
+    "clock": {
+      "format": "󰥔  {:%a, %d %b  ·  %H:%M}",
+      "locale": "ru_RU.UTF-8",
+      "tooltip-format": "<big>{:%B %Y}</big>\n<tt><small>{calendar}</small></tt>\n\nЛКМ — открыть calcurse",
+      "on-click": "alacritty -e calcurse"
+    },
+    "cpu#side": {
+      "interval": 2,
+      "format": "󰍛 {usage}%",
+      "states": {
+        "warning": 70,
+        "critical": 90
+      },
+      "tooltip": true,
+      "on-click": "alacritty -e btop",
+      "expand": false
+    },
+    "memory#side": {
+      "interval": 3,
+      "format": "󰘚 {used:0.1f} ГБ",
+      "states": {
+        "warning": 80,
+        "critical": 92
+      },
+      "tooltip-format": "ОЗУ: {used:0.1f} / {total:0.1f} ГиБ\nЛКМ — открыть btop",
+      "on-click": "alacritty -e btop",
+      "expand": false
+    },
+    "custom/language": {
+      "exec": "python3 $HOME/.config/waybar/scripts/language.py",
+      "return-type": "json",
+      "restart-interval": 2,
+      "exec-on-event": false,
+      "on-click": "bash $HOME/.config/waybar/scripts/language-toggle.sh",
+      "tooltip": true,
+      "expand": false
+    },
+    "pulseaudio#side": {
+      "scroll-step": 2,
+      "format": "{icon} {volume}%",
+      "format-muted": "󰖁",
+      "format-icons": {
+        "headphone": [
+          "",
+          "",
+          ""
+        ],
+        "headset": [
+          "",
+          "",
+          ""
+        ],
+        "speaker": [
+          "",
+          "",
+          ""
+        ],
+        "default": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "format-bluetooth": "{icon} {volume}%",
+      "on-click": "pavucontrol",
+      "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+      "expand": false
+    },
+    "network#side": {
+      "format-wifi": "{icon}",
+      "format-ethernet": "󰈀",
+      "format-linked": "󰈂",
+      "format-disconnected": "󰤭",
+      "format-disabled": "󰤭",
+      "format-icons": [
+        "󰤯",
+        "󰤟",
+        "󰤢",
+        "󰤥",
+        "󰤨"
+      ],
+      "tooltip-format-wifi": "{essid}  {signalStrength}%\n{ipaddr}",
+      "tooltip-format-ethernet": "Ethernet  {ipaddr}",
+      "tooltip-format-disconnected": "Сеть отключена",
+      "on-click": "bash $HOME/.config/waybar/scripts/wifi-menu.sh",
+      "on-click-right": "nm-connection-editor",
+      "interval": 5,
+      "expand": false
+    },
+    "on-sigusr2": "reload"
+  },
+  {
+    "output": "@CENTER@",
+    "layer": "top",
+    "position": "top",
+    "height": 38,
+    "spacing": 0,
+    "margin-top": 7,
+    "margin-left": 9,
+    "margin-right": 9,
+    "modules-left": [
+      "hyprland/workspaces"
+    ],
+    "modules-center": [
+      "clock"
+    ],
+    "modules-right": [
+      "mpris",
+      "cpu",
+      "memory",
+      "custom/language",
+      "bluetooth",
+      "custom/vpn",
+      "pulseaudio",
+      "custom/headset",
+      "network",
+      "custom/trash",
+      "tray",
+      "custom/power"
+    ],
+    "hyprland/workspaces": {
+      "all-outputs": false,
+      "disable-scroll": true,
+      "sort-by-number": true,
+      "format": "{icon}",
+      "format-icons": {
+        "1": "1",
+        "2": "2",
+        "3": "3",
+        "4": "4",
+        "5": "5",
+        "6": "6",
+        "7": "7",
+        "default": ""
+      },
+      "on-click": "activate",
+      "persistent-workspaces": {
+        "1": [
+          "@CENTER@"
+        ],
+        "2": [
+          "@CENTER@"
+        ],
+        "3": [
+          "@CENTER@"
+        ],
+        "4": [
+          "@CENTER@"
+        ],
+        "5": [
+          "@CENTER@"
+        ],
+        "6": [
+          "@CENTER@"
+        ],
+        "7": [
+          "@CENTER@"
+        ]
+      },
+      "expand": false,
+      "show-special": false
+    },
+    "clock": {
+      "format": "󰥔  {:%a, %d %b  ·  %H:%M}",
+      "locale": "ru_RU.UTF-8",
+      "tooltip-format": "<big>{:%B %Y}</big>\n<tt><small>{calendar}</small></tt>\n\nЛКМ — открыть calcurse",
+      "on-click": "alacritty -e calcurse"
+    },
+    "mpris": {
+      "format": "{player_icon} {artist} — {title}",
+      "format-paused": "󰏤 {artist} — {title}",
+      "player-icons": {
+        "spotify": "",
+        "default": "󰎈"
+      },
+      "max-length": 30,
+      "on-click": "playerctl play-pause",
+      "on-click-middle": "playerctl next",
+      "on-click-right": "playerctl previous",
+      "on-scroll-up": "playerctl next",
+      "on-scroll-down": "playerctl previous"
+    },
+    "cpu": {
+      "interval": 2,
+      "format": "󰍛 {usage}%",
+      "states": {
+        "warning": 70,
+        "critical": 90
+      },
+      "tooltip": true,
+      "on-click": "alacritty -e btop"
+    },
+    "memory": {
+      "interval": 3,
+      "format": "󰘚 {used:0.1f} ГБ",
+      "states": {
+        "warning": 80,
+        "critical": 92
+      },
+      "tooltip-format": "ОЗУ: {used:0.1f} / {total:0.1f} ГиБ\nЛКМ — открыть btop",
+      "on-click": "alacritty -e btop"
+    },
+    "custom/language": {
+      "exec": "python3 $HOME/.config/waybar/scripts/language.py",
+      "return-type": "json",
+      "restart-interval": 2,
+      "exec-on-event": false,
+      "on-click": "bash $HOME/.config/waybar/scripts/language-toggle.sh",
+      "tooltip": true,
+      "expand": false
+    },
+    "bluetooth": {
+      "format": "",
+      "format-disabled": "",
+      "format-off": "",
+      "format-on": "",
+      "format-connected": "",
+      "format-connected-battery": "",
+      "tooltip-format": "Bluetooth: {status}",
+      "tooltip-format-connected": "{device_enumerate}",
+      "tooltip-format-enumerate-connected": "{device_alias}",
+      "tooltip-format-enumerate-connected-battery": "{device_alias}: {device_battery_percentage}%",
+      "on-click": "bash $HOME/.config/waybar/scripts/bluetooth-menu.sh",
+      "on-click-right": "blueman-manager",
+      "expand": false
+    },
+    "custom/vpn": {
+      "exec": "python3 $HOME/.config/waybar/scripts/vpn-status.py",
+      "return-type": "json",
+      "interval": 3,
+      "signal": 11,
+      "exec-on-event": true,
+      "on-click": "bash $HOME/.config/waybar/scripts/vpn-menu.sh menu",
+      "on-click-right": "bash $HOME/.config/waybar/scripts/vpn-menu.sh editor",
+      "tooltip": true,
+      "expand": false
+    },
+    "pulseaudio": {
+      "scroll-step": 2,
+      "format": "{icon} {volume}%",
+      "format-muted": "󰖁",
+      "format-icons": {
+        "headphone": [
+          "",
+          "",
+          ""
+        ],
+        "headset": [
+          "",
+          "",
+          ""
+        ],
+        "hands-free": [
+          "",
+          "",
+          ""
+        ],
+        "speaker": [
+          "",
+          "",
+          ""
+        ],
+        "default": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "format-bluetooth": "{icon} {volume}%",
+      "on-click": "pavucontrol",
+      "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+      "expand": false
+    },
+    "custom/headset": {
+      "exec": "$HOME/.config/hypr/scripts/headset-battery.sh",
+      "return-type": "json",
+      "interval": 15
+    },
+    "network": {
+      "format-wifi": "{icon} Wi-Fi",
+      "format-ethernet": "󰈀 LAN",
+      "format-linked": "󰈂",
+      "format-disconnected": "󰤭",
+      "format-disabled": "󰤭",
+      "format-icons": [
+        "󰤯",
+        "󰤟",
+        "󰤢",
+        "󰤥",
+        "󰤨"
+      ],
+      "tooltip-format-wifi": "{essid}  {signalStrength}%\n{ipaddr}",
+      "tooltip-format-ethernet": "Ethernet  {ipaddr}",
+      "tooltip-format-disconnected": "Сеть отключена",
+      "on-click": "bash $HOME/.config/waybar/scripts/wifi-menu.sh",
+      "on-click-right": "nm-connection-editor",
+      "interval": 5,
+      "expand": false
+    },
+    "custom/trash": {
+      "exec": "python3 $HOME/.config/waybar/scripts/trash-status.py",
+      "return-type": "json",
+      "interval": 10,
+      "signal": 10,
+      "exec-on-event": true,
+      "on-click": "bash $HOME/.config/waybar/scripts/trash-action.sh click",
+      "on-click-right": "bash $HOME/.config/waybar/scripts/trash-action.sh open",
+      "tooltip": true,
+      "expand": false
+    },
+    "tray": {
+      "icon-size": 16,
+      "spacing": 6
+    },
+    "custom/power": {
+      "format": "󰐥",
+      "tooltip": false,
+      "on-click": "$HOME/.config/hypr/scripts/powermenu.sh"
+    },
+    "on-sigusr2": "reload"
+  },
+  {
+    "output": "@RIGHT@",
+    "layer": "top",
+    "position": "bottom",
+    "height": 38,
+    "spacing": 0,
+    "margin-bottom": 7,
+    "margin-left": 9,
+    "margin-right": 9,
+    "modules-left": [
+      "hyprland/workspaces"
+    ],
+    "modules-center": [
+      "clock"
+    ],
+    "modules-right": [
+      "mpris#side",
+      "cpu#side",
+      "memory#side",
+      "custom/language",
+      "pulseaudio#side",
+      "network#side"
+    ],
+    "hyprland/workspaces": {
+      "all-outputs": false,
+      "disable-scroll": true,
+      "sort-by-number": true,
+      "format": "{icon}",
+      "format-icons": {
+        "8": "8",
+        "9": "9",
+        "default": ""
+      },
+      "on-click": "activate",
+      "persistent-workspaces": {
+        "8": [
+          "@RIGHT@"
+        ],
+        "9": [
+          "@RIGHT@"
+        ]
+      },
+      "expand": false,
+      "show-special": false
+    },
+    "clock": {
+      "format": "󰥔  {:%d %b  ·  %H:%M}",
+      "locale": "ru_RU.UTF-8",
+      "tooltip-format": "<big>{:%B %Y}</big>\n<tt><small>{calendar}</small></tt>\n\nЛКМ — открыть calcurse",
+      "on-click": "alacritty -e calcurse"
+    },
+    "mpris#side": {
+      "format": "{player_icon} {title}",
+      "format-paused": "󰏤 {title}",
+      "player-icons": {
+        "spotify": "",
+        "default": "󰎈"
+      },
+      "max-length": 18,
+      "on-click": "playerctl play-pause",
+      "on-click-middle": "playerctl next",
+      "on-click-right": "playerctl previous",
+      "on-scroll-up": "playerctl next",
+      "on-scroll-down": "playerctl previous"
+    },
+    "cpu#side": {
+      "interval": 2,
+      "format": "󰍛 {usage}%",
+      "states": {
+        "warning": 70,
+        "critical": 90
+      },
+      "tooltip": true,
+      "on-click": "alacritty -e btop",
+      "expand": false
+    },
+    "memory#side": {
+      "interval": 3,
+      "format": "󰘚 {used:0.1f} ГБ",
+      "states": {
+        "warning": 80,
+        "critical": 92
+      },
+      "tooltip-format": "ОЗУ: {used:0.1f} / {total:0.1f} ГиБ\nЛКМ — открыть btop",
+      "on-click": "alacritty -e btop",
+      "expand": false
+    },
+    "custom/language": {
+      "exec": "python3 $HOME/.config/waybar/scripts/language.py",
+      "return-type": "json",
+      "restart-interval": 2,
+      "exec-on-event": false,
+      "on-click": "bash $HOME/.config/waybar/scripts/language-toggle.sh",
+      "tooltip": true,
+      "expand": false
+    },
+    "pulseaudio#side": {
+      "scroll-step": 2,
+      "format": "{icon} {volume}%",
+      "format-muted": "󰖁",
+      "format-icons": {
+        "headphone": [
+          "",
+          "",
+          ""
+        ],
+        "headset": [
+          "",
+          "",
+          ""
+        ],
+        "speaker": [
+          "",
+          "",
+          ""
+        ],
+        "default": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "format-bluetooth": "{icon} {volume}%",
+      "on-click": "pavucontrol",
+      "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+      "expand": false
+    },
+    "network#side": {
+      "format-wifi": "{icon}",
+      "format-ethernet": "󰈀",
+      "format-linked": "󰈂",
+      "format-disconnected": "󰤭",
+      "format-disabled": "󰤭",
+      "format-icons": [
+        "󰤯",
+        "󰤟",
+        "󰤢",
+        "󰤥",
+        "󰤨"
+      ],
+      "tooltip-format-wifi": "{essid}  {signalStrength}%\n{ipaddr}",
+      "tooltip-format-ethernet": "Ethernet  {ipaddr}",
+      "tooltip-format-disconnected": "Сеть отключена",
+      "on-click": "bash $HOME/.config/waybar/scripts/wifi-menu.sh",
+      "on-click-right": "nm-connection-editor",
+      "interval": 5,
+      "expand": false
+    },
+    "on-sigusr2": "reload"
+  }
+]

@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+# Необязательная гарнитура для Waybar.
+# Скопируйте этот файл в:
+#   ~/.config/hypr/user-settings.sh
+#
+# Узнать MAC-адрес:
+#   bluetoothctl devices
+
+HEADSET_MAC=""
+HEADSET_NAME="Bluetooth headset"

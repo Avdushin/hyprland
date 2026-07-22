@@ -20,3 +20,5 @@ _exports/
 # Machine-local overrides and generated runtime state.
 dotfiles/.config/hypr/user/local.lua
 dotfiles/.config/hypr/monitors/local.lua
+*.pyc
+dotfiles/.config/hypr/user-settings.sh

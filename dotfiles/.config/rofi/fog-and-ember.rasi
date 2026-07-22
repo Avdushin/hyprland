@@ -3,9 +3,9 @@
 configuration {
   modi: "drun,run,window";
   show-icons: true;
-  display-drun: "Applications";
+  display-drun: "Приложения";
   drun-display-format: "{name}";
-  font: "JetBrains Mono 12";
+  font: "JetBrainsMono Nerd Font 12";
   location: 0;
 }
 
@@ -44,7 +44,7 @@ prompt {
 }
 
 entry {
-  placeholder: "Search…";
+  placeholder: "Поиск…";
   placeholder-color: @muted;
 }
 

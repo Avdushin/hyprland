@@ -6,7 +6,7 @@ TERM = "alacritty"
 
 [window]
 dynamic_title = true
-opacity = 0.90
+opacity = 0.84
 title = "Alacritty"
 padding = { x = 12, y = 8 }
 
@@ -19,7 +19,7 @@ builtin_box_drawing = true
 size = 13.0
 
 [font.normal]
-family = "JetBrains Mono"
+family = "JetBrainsMono Nerd Font"
 style = "Regular"
 
 [font.bold]

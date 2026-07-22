@@ -2,12 +2,17 @@
 Description=Fog & Ember Waybar
 After=graphical-session.target
 PartOf=graphical-session.target
+StartLimitIntervalSec=30
+StartLimitBurst=5
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/waybar -c %h/.config/waybar/config.jsonc -s %h/.config/waybar/style.css
+ExecStartPre=/usr/bin/test -s %t/fog-and-ember-waybar.json
+ExecStart=/usr/bin/waybar -c %t/fog-and-ember-waybar.json -s %h/.config/waybar/style.css
 Restart=on-failure
-RestartSec=1
+RestartSec=2
+TimeoutStopSec=5
+KillMode=control-group
 
 [Install]
 WantedBy=graphical-session.target
