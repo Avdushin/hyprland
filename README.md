@@ -1,4 +1,4 @@
-#  Hyprland - Fog & Ember 
+#  Hyprland - Fog & Ember
 
 Переносимая и цельная сборка рабочего окружения Hyprland для **Arch Linux, EndeavourOS, Manjaro и Fedora**.
 
@@ -101,6 +101,7 @@ git pull --ff-only
 ## Документация
 
 * [Горячие клавиши](docs/KEYBINDS.md)
+* [Neovim / NvChad](docs/NVIM.md)
 * [Настройка мониторов](docs/MONITORS.md)
 * [Поддержка дистрибутивов](docs/DISTRIBUTIONS.md)
 * [Настройка и персонализация](docs/CUSTOMIZATION.md)

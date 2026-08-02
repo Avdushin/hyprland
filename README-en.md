@@ -106,6 +106,7 @@ A new dated backup is created every time.
 ## Documentation
 
 - [Key bindings](docs/KEYBINDS.md)
+- [Neovim / NvChad](docs/NVIM.md)
 - [Monitor setup](docs/MONITORS.md)
 - [Distribution support](docs/DISTRIBUTIONS.md)
 - [Customization](docs/CUSTOMIZATION.md)
