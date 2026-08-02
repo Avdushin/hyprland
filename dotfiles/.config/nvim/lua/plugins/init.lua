@@ -91,6 +91,8 @@ return {
   -- === Images in Neovim ===
   {
     "3rd/image.nvim",
+    ft = { "markdown" },
+    cmd = { "ImageReport" },
     dependencies = { "nvim-lua/plenary.nvim" },
     build = false, -- чтобы не пытался собирать luarocks-рок
     opts = {
@@ -101,9 +103,9 @@ return {
       integrations = {
         markdown = {
           enabled = true,
-          clear_in_insert_mode = false,
+          clear_in_insert_mode = true,
           download_remote_images = true,
-          only_render_image_at_cursor = false,
+          only_render_image_at_cursor = true,
           only_render_image_at_cursor_mode = "popup", -- или "inline"
           floating_windows = false,
           filetypes = { "markdown" },

@@ -231,3 +231,32 @@ end, {
   silent = true,
   desc = "Toggle Fog & Ember / Gruvbox",
 })
+
+-- Markdown images: toggle image.nvim
+-- Space -> m -> i
+map("n", "<leader>mi", function()
+  local ok, image = pcall(require, "image")
+
+  if not ok then
+    vim.notify("image.nvim не загружен", vim.log.levels.ERROR)
+    return
+  end
+
+  if image.is_enabled() then
+    image.disable()
+    vim.notify("Изображения Markdown выключены")
+  else
+    image.enable()
+    vim.notify("Изображения Markdown включены")
+  end
+end, {
+  silent = true,
+  desc = "Toggle Markdown images",
+})
+
+-- Диагностический отчёт image.nvim
+map("n", "<leader>mI", "<cmd>ImageReport<cr>", {
+  silent = true,
+  desc = "Markdown image report",
+})
+
