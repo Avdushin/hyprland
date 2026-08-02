@@ -6,7 +6,7 @@ and Fedora**.
 ![Fog & Ember desktop](assets/demo/fog-and-ember-three-monitors.webp)
 
 The repository installs both the configuration and its desktop dependencies.
-A clean system does not need to have Hyprland, Waybar, Alacritty, Rofi, Wofi
+A clean system does not need to have Hyprland, Waybar, Ghostty, Rofi, Wofi
 or Thunar preinstalled.
 
 ## Included
@@ -14,7 +14,7 @@ or Thunar preinstalled.
 - Hyprland Lua configuration;
 - universal automatic monitor fallback plus local overrides;
 - Waybar;
-- Alacritty;
+- Ghostty;
 - Rofi and Wofi;
 - Thunar integration;
 - Mako notifications;

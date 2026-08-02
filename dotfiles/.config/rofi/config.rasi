@@ -2,6 +2,6 @@ configuration {
   modi: "drun,run,window";
   show-icons: true;
   icon-theme: "Papirus-Dark";
-  terminal: "alacritty";
+  terminal: "ghostty";
 }
 @theme "fog-and-ember"

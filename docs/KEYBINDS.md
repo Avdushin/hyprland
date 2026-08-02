@@ -2,7 +2,7 @@
 
 | Shortcut | Action |
 |---|---|
-| `Super + Enter` | Alacritty |
+| `Super + Enter` | Ghostty |
 | `Super + B` | Default browser |
 | `Super + E` | Thunar |
 | `Super + D` | Rofi |

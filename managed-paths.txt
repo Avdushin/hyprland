@@ -1,11 +1,12 @@
 .config/hypr
 .config/waybar
-.config/alacritty
+.config/ghostty
 .config/rofi
 .config/wofi
 .config/mako
 .config/Thunar
 .config/xfce4/helpers.rc
+.local/share/xfce4/helpers/custom-TerminalEmulator.desktop
 .config/gtk-3.0/settings.ini
 .config/gtk-4.0/settings.ini
 .config/systemd/user/waybar-fog-and-ember.service

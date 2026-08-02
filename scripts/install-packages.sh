@@ -50,11 +50,12 @@ install_fedora() {
   local dnf
   dnf=$(fedora_dnf)
 
-  note 'Enabling the upstream-recommended lionheartp/Hyprland COPR'
+  note 'Enabling required COPR repositories'
   if ! "$dnf" copr --help >/dev/null 2>&1; then
     run sudo "$dnf" install -y dnf-plugins-core || run sudo "$dnf" install -y dnf5-plugins
   fi
   run sudo "$dnf" copr enable -y lionheartp/Hyprland
+  run sudo "$dnf" copr enable -y scottames/ghostty
   run sudo "$dnf" makecache
 
   mapfile -t requested < <(read_package_file "$repo_root/packages/fedora.txt")

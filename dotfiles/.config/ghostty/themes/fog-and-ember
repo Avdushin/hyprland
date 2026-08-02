@@ -1,0 +1,38 @@
+# Fog & Ember / «Туман и янтарь»
+# Пользовательская тема Ghostty.
+
+background = #1B222C
+foreground = #EAE6DD
+
+cursor-color = #7895A6
+cursor-text = #11141A
+
+selection-background = #3B4854
+selection-foreground = #F3F0E8
+
+# Normal colors
+palette = 0=#303946
+palette = 1=#CF6C73
+palette = 2=#82A184
+palette = 3=#D0A35D
+palette = 4=#86A5B6
+palette = 5=#A7849B
+palette = 6=#8DAFB1
+palette = 7=#D5D4CE
+
+# Bright colors
+palette = 8=#727D89
+palette = 9=#E1848A
+palette = 10=#9DB79F
+palette = 11=#E3BD75
+palette = 12=#94AEBB
+palette = 13=#C09AAF
+palette = 14=#9AB8BA
+palette = 15=#F3F0E8
+
+# Поиск
+search-background = #59616C
+search-foreground = #F3F0E8
+
+search-selected-background = #BF8950
+search-selected-foreground = #11141A

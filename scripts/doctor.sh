@@ -21,6 +21,7 @@ soft() {
 }
 
 config_home="${XDG_CONFIG_HOME:-$HOME/.config}"
+data_home="${XDG_DATA_HOME:-$HOME/.local/share}"
 hypr_dir="$config_home/hypr"
 waybar_dir="$config_home/waybar"
 
@@ -36,7 +37,7 @@ required_commands=(
     Hyprland
     hyprctl
     waybar
-    alacritty
+    ghostty
     rofi
     wofi
     thunar
@@ -94,14 +95,19 @@ required_files=(
     "$hypr_dir/generated-theme.lua"
     "$hypr_dir/scripts/session-start.sh"
     "$hypr_dir/scripts/launch-waybar.sh"
+    "$hypr_dir/scripts/wifi-menu.sh"
     "$waybar_dir/config.template.json"
     "$waybar_dir/style.css"
     "$waybar_dir/scripts/render-config.py"
     "$waybar_dir/scripts/language.py"
     "$waybar_dir/scripts/trash-status.py"
     "$waybar_dir/scripts/vpn-status.py"
+    "$waybar_dir/scripts/vpn-menu.sh"
+    "$waybar_dir/scripts/wifi-menu.sh"
     "$config_home/systemd/user/waybar-fog-and-ember.service"
-    "$config_home/alacritty/alacritty.toml"
+    "$config_home/ghostty/config.ghostty"
+    "$config_home/ghostty/themes/fog-and-ember"
+    "$data_home/xfce4/helpers/custom-TerminalEmulator.desktop"
     "$config_home/rofi/fog-and-ember.rasi"
     "$config_home/wofi/style.css"
     "$config_home/Thunar/uca.xml"
@@ -209,6 +215,8 @@ python_files=(
     "$waybar_dir/scripts/language.py"
     "$waybar_dir/scripts/trash-status.py"
     "$waybar_dir/scripts/vpn-status.py"
+    "$waybar_dir/scripts/vpn-menu.sh"
+    "$waybar_dir/scripts/wifi-menu.sh"
 )
 
 python_ok=true
@@ -231,17 +239,12 @@ done
 
 note 'Application configuration syntax'
 
-if python3 - "$config_home/alacritty/alacritty.toml" <<'PY_TOML'
-import sys
-import tomllib
-
-with open(sys.argv[1], "rb") as stream:
-    tomllib.load(stream)
-PY_TOML
-then
-    ok 'Alacritty TOML'
+if ghostty +show-config \
+    --config-file="$config_home/ghostty/config.ghostty" \
+    >/dev/null 2>&1; then
+    ok 'Ghostty configuration'
 else
-    bad 'Alacritty TOML'
+    bad 'Ghostty configuration'
 fi
 
 if python3 - "$config_home/Thunar/uca.xml" <<'PY_XML'

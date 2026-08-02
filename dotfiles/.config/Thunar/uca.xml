@@ -5,8 +5,8 @@
     <name>Open Terminal Here</name>
     <submenu></submenu>
     <unique-id>1700000000000000-1</unique-id>
-    <command>alacritty --working-directory %f</command>
-    <description>Open Alacritty in the selected directory</description>
+    <command>ghostty --working-directory="%f"</command>
+    <description>Open Ghostty in the selected directory</description>
     <range></range>
     <patterns>*</patterns>
     <startup-notify/>

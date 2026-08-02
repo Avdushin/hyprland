@@ -1,2 +1,2 @@
 FileManager=Thunar
-TerminalEmulator=alacritty
+TerminalEmulator=custom-TerminalEmulator

@@ -32,6 +32,7 @@ echo 'Checking required files...'
 required_files=(
     dotfiles/.config/hypr/palette.conf
     dotfiles/.config/hypr/scripts/launch-waybar.sh
+    dotfiles/.config/hypr/scripts/wifi-menu.sh
     dotfiles/.config/hypr/scripts/sync-theme.sh
     dotfiles/.config/hypr/scripts/headset-battery.sh
     dotfiles/.config/hypr/user-settings.sh.example
@@ -43,8 +44,11 @@ required_files=(
     dotfiles/.config/waybar/scripts/trash-action.sh
     dotfiles/.config/waybar/scripts/vpn-status.py
     dotfiles/.config/waybar/scripts/vpn-menu.sh
+    dotfiles/.config/waybar/scripts/wifi-menu.sh
     dotfiles/.config/systemd/user/waybar-fog-and-ember.service
-    dotfiles/.config/alacritty/alacritty.toml
+    dotfiles/.config/ghostty/config.ghostty
+    dotfiles/.config/ghostty/themes/fog-and-ember
+    dotfiles/.local/share/xfce4/helpers/custom-TerminalEmulator.desktop
     dotfiles/.config/rofi/fog-and-ember.rasi
     dotfiles/.config/Thunar/uca.xml
 )
@@ -66,6 +70,7 @@ executable_files=(
     scripts/check-repo.sh
     scripts/doctor.sh
     dotfiles/.config/hypr/scripts/launch-waybar.sh
+    dotfiles/.config/hypr/scripts/wifi-menu.sh
     dotfiles/.config/hypr/scripts/sync-theme.sh
     dotfiles/.config/hypr/scripts/headset-battery.sh
     dotfiles/.config/waybar/scripts/render-config.py
@@ -73,6 +78,7 @@ executable_files=(
     dotfiles/.config/waybar/scripts/trash-action.sh
     dotfiles/.config/waybar/scripts/vpn-status.py
     dotfiles/.config/waybar/scripts/vpn-menu.sh
+    dotfiles/.config/waybar/scripts/wifi-menu.sh
 )
 
 for file in "${executable_files[@]}"; do
@@ -85,18 +91,60 @@ python3 -m json.tool \
     dotfiles/.config/waybar/config.template.json \
     >/dev/null
 
-python3 - <<'PY'
-import tomllib
+python3 - <<'PY_GHOSTTY'
+from pathlib import Path
 import xml.etree.ElementTree as ET
 
-with open(
-    "dotfiles/.config/alacritty/alacritty.toml",
-    "rb",
-) as stream:
-    tomllib.load(stream)
+
+def parse_ghostty(path: Path) -> list[tuple[str, str]]:
+    entries: list[tuple[str, str]] = []
+
+    for number, raw_line in enumerate(
+        path.read_text(encoding="utf-8").splitlines(),
+        start=1,
+    ):
+        line = raw_line.strip()
+
+        if not line or line.startswith("#"):
+            continue
+
+        if "=" not in line:
+            raise SystemExit(
+                f"{path}:{number}: expected key = value"
+            )
+
+        key, value = line.split("=", 1)
+        key = key.strip()
+        value = value.strip().strip('"')
+
+        if not key:
+            raise SystemExit(
+                f"{path}:{number}: empty configuration key"
+            )
+
+        entries.append((key, value))
+
+    return entries
+
+
+config_path = Path(
+    "dotfiles/.config/ghostty/config.ghostty"
+)
+theme_path = Path(
+    "dotfiles/.config/ghostty/themes/fog-and-ember"
+)
+
+config = parse_ghostty(config_path)
+parse_ghostty(theme_path)
+
+if ("theme", "fog-and-ember") not in config:
+    raise SystemExit(
+        "Ghostty config does not select "
+        "the fog-and-ember theme"
+    )
 
 ET.parse("dotfiles/.config/Thunar/uca.xml")
-PY
+PY_GHOSTTY
 
 echo 'Checking Python syntax...'
 
@@ -290,12 +338,12 @@ done
 
 echo 'Checking package dependencies...'
 
-for package in btop calcurse iproute2; do
+for package in ghostty btop calcurse iproute2; do
     grep -qxF "$package" packages/arch.txt ||
         fail "missing Arch package: $package"
 done
 
-for package in btop calcurse iproute; do
+for package in ghostty btop calcurse iproute; do
     grep -qxF "$package" packages/fedora.txt ||
         fail "missing Fedora package: $package"
 done

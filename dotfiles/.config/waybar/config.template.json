@@ -43,7 +43,7 @@
       "format": "󰥔  {:%a, %d %b  ·  %H:%M}",
       "locale": "ru_RU.UTF-8",
       "tooltip-format": "<big>{:%B %Y}</big>\n<tt><small>{calendar}</small></tt>\n\nЛКМ — открыть calcurse",
-      "on-click": "alacritty -e calcurse"
+      "on-click": "ghostty -e calcurse"
     },
     "cpu#side": {
       "interval": 2,
@@ -53,7 +53,7 @@
         "critical": 90
       },
       "tooltip": true,
-      "on-click": "alacritty -e btop",
+      "on-click": "ghostty -e btop",
       "expand": false
     },
     "memory#side": {
@@ -64,7 +64,7 @@
         "critical": 92
       },
       "tooltip-format": "ОЗУ: {used:0.1f} / {total:0.1f} ГиБ\nЛКМ — открыть btop",
-      "on-click": "alacritty -e btop",
+      "on-click": "ghostty -e btop",
       "expand": false
     },
     "custom/language": {
@@ -205,7 +205,7 @@
       "format": "󰥔  {:%a, %d %b  ·  %H:%M}",
       "locale": "ru_RU.UTF-8",
       "tooltip-format": "<big>{:%B %Y}</big>\n<tt><small>{calendar}</small></tt>\n\nЛКМ — открыть calcurse",
-      "on-click": "alacritty -e calcurse"
+      "on-click": "ghostty -e calcurse"
     },
     "mpris": {
       "format": "{player_icon} {artist} — {title}",
@@ -229,7 +229,7 @@
         "critical": 90
       },
       "tooltip": true,
-      "on-click": "alacritty -e btop"
+      "on-click": "ghostty -e btop"
     },
     "memory": {
       "interval": 3,
@@ -239,7 +239,7 @@
         "critical": 92
       },
       "tooltip-format": "ОЗУ: {used:0.1f} / {total:0.1f} ГиБ\nЛКМ — открыть btop",
-      "on-click": "alacritty -e btop"
+      "on-click": "ghostty -e btop"
     },
     "custom/language": {
       "exec": "python3 $HOME/.config/waybar/scripts/language.py",
@@ -272,7 +272,7 @@
       "signal": 11,
       "exec-on-event": true,
       "on-click": "bash $HOME/.config/waybar/scripts/vpn-menu.sh menu",
-      "on-click-right": "bash $HOME/.config/waybar/scripts/vpn-menu.sh editor",
+      "on-click-right": "bash $HOME/.config/waybar/scripts/vpn-menu.sh amnezia",
       "tooltip": true,
       "expand": false
     },
@@ -409,7 +409,7 @@
       "format": "󰥔  {:%d %b  ·  %H:%M}",
       "locale": "ru_RU.UTF-8",
       "tooltip-format": "<big>{:%B %Y}</big>\n<tt><small>{calendar}</small></tt>\n\nЛКМ — открыть calcurse",
-      "on-click": "alacritty -e calcurse"
+      "on-click": "ghostty -e calcurse"
     },
     "mpris#side": {
       "format": "{player_icon} {title}",
@@ -433,7 +433,7 @@
         "critical": 90
       },
       "tooltip": true,
-      "on-click": "alacritty -e btop",
+      "on-click": "ghostty -e btop",
       "expand": false
     },
     "memory#side": {
@@ -444,7 +444,7 @@
         "critical": 92
       },
       "tooltip-format": "ОЗУ: {used:0.1f} / {total:0.1f} ГиБ\nЛКМ — открыть btop",
-      "on-click": "alacritty -e btop",
+      "on-click": "ghostty -e btop",
       "expand": false
     },
     "custom/language": {

@@ -8,7 +8,8 @@ xdg-desktop-portal-hyprland
 # Core desktop
 xorg-x11-server-Xwayland
 waybar
-alacritty
+# Installed from the scottames/ghostty COPR enabled by the installer.
+ghostty
 rofi
 wofi
 mako

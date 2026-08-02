@@ -2,7 +2,7 @@
 hyprland
 xorg-xwayland
 waybar
-alacritty
+ghostty
 rofi
 wofi
 mako
