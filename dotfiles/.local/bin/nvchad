@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+
+# Обычный ~/.config/nvim без отдельного NVIM_APPNAME.
+unset NVIM_APPNAME
+
+exec nvim "$@"

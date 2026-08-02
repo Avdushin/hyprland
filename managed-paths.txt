@@ -11,3 +11,5 @@
 .config/gtk-4.0/settings.ini
 .config/systemd/user/waybar-fog-and-ember.service
 .local/share/fog-and-ember
+.config/nvim
+.local/bin/nvchad
