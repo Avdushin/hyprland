@@ -497,7 +497,7 @@ nvim
 Ожидаемый результат:
 
 ```text
-/home/user/.config/nvim
+~/.config/nvim
 ```
 
 Текущая тема:
