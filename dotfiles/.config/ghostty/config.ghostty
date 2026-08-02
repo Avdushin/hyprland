@@ -116,3 +116,6 @@ keybind = ctrl+shift+i=unbind
 
 # Передаём Ctrl+Shift+T в Neovim, а не создаём вкладку Ghostty.
 keybind = ctrl+shift+t=unbind
+
+# Не открывать новое окно Ghostty по Ctrl+Shift+N.
+keybind = ctrl+shift+n=unbind
