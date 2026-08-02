@@ -1,5 +1,5 @@
 # ============================================================
-# Ghostty — Fog & Ember
+# Ghostty — конфигурация, перенесённая из Alacritty
 # ============================================================
 
 theme = fog-and-ember
@@ -20,7 +20,7 @@ font-style-bold-italic = "Bold Italic"
 
 font-size = 16
 
-# Отключаем программные лигатуры для строгого рендеринга.
+# Alacritty не использовал программные лигатуры.
 font-feature = -calt, -liga, -dlig
 
 # Аналог draw_bold_text_with_bright_colors.
@@ -40,6 +40,7 @@ shell-integration-features = no-cursor
 # Окно
 # ------------------------------------------------------------
 
+#background-opacity = 0.88 
 background-opacity = 0.84
 
 # Прозрачность также внутри приложений, которые сами рисуют фон:
@@ -51,7 +52,7 @@ window-padding-y = 8
 window-padding-balance = false
 window-padding-color = background
 
-# Минималистичный внешний вид под Hyprland.
+# Внешний вид как у Alacritty под Hyprland.
 window-decoration = none
 window-show-tab-bar = never
 resize-overlay = never
@@ -85,7 +86,7 @@ mouse-hide-while-typing = false
 
 selection-word-chars = ",│`|:\"' ()[]{}<>\t"
 
-# Стандартные сочетания буфера обмена задаются ниже.
+# Те же сочетания, что в Alacritty.
 
 # ------------------------------------------------------------
 # Буфер обмена
@@ -102,3 +103,16 @@ app-notifications = no-clipboard-copy
 # Обычные сочетания копирования и вставки.
 keybind = performable:ctrl+shift+c=copy_to_clipboard
 keybind = ctrl+shift+v=paste_from_clipboard
+
+# ------------------------------------------------------------
+# Передаём сочетания приложениям внутри терминала
+# ------------------------------------------------------------
+
+# Neovim: поиск и замена по проекту
+keybind = ctrl+shift+f=unbind
+
+# Neovim: форматирование
+keybind = ctrl+shift+i=unbind
+
+# Передаём Ctrl+Shift+T в Neovim, а не создаём вкладку Ghostty.
+keybind = ctrl+shift+t=unbind

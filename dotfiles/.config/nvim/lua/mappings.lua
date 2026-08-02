@@ -26,18 +26,34 @@ map({ "n", "t" }, "<C-e>", function()
   require("nvchad.term").toggle { id = 2, pos = "vsp", size = 0.3 }
 end, { desc = "Right terminal" })
 
--- Floating terminal (Ctrl + Shift + t)
-map({ "n", "t" }, "<C-S-t>", function()
+-- Floating terminal in the center of the current Neovim UI
+local function toggle_floating_terminal()
   require("nvchad.term").toggle {
     id = 3,
     pos = "float",
+    float_opts = {
+      relative = "editor",
+      width = 0.82,
+      height = 0.72,
+      row = 0.12,
+      col = 0.09,
+      border = "rounded",
+    },
   }
-end, { desc = "Floating terminal" })
+end
 
--- Terminal in a tab
-map("n", "<leader>tt", function()
-  require("nvchad.term").new { pos = "t" }
-end, { desc = "Terminal tab" })
+-- Работает и из Normal mode, и прямо внутри терминала.
+-- Повторное нажатие закрывает это же окно.
+map({ "n", "t" }, "<C-S-t>", toggle_floating_terminal, {
+  silent = true,
+  desc = "Toggle floating terminal",
+})
+
+-- Альтернативный вызов из Normal mode: Space -> t -> t.
+map("n", "<leader>tt", toggle_floating_terminal, {
+  silent = true,
+  desc = "Toggle floating terminal",
+})
 
 -- File search like VS Code: Ctrl + P
 map("n", "<C-p>", function()
@@ -103,7 +119,7 @@ map("i", "<C-S-Up>", "<Esc>:m .-2<CR>==gi", opts)
 -- Обернуть содержимое () в кавычки по <leader>"
 vim.keymap.set("n", '<leader>"', function()
   vim.cmd.normal { "yi(", bang = true }
-  local text = vim.fn.getreg("0")
+  local text = vim.fn.getreg "0"
   vim.cmd.normal { "ci(", bang = true }
   vim.api.nvim_put({ '"' .. text .. '"' }, "c", true, true)
 end, { silent = true, desc = 'Wrap () content in ""' })
@@ -111,10 +127,10 @@ end, { silent = true, desc = 'Wrap () content in ""' })
 -- Переключение кавычек (" → ' → ` → ")
 vim.keymap.set("n", "<leader>q", function()
   vim.cmd.normal { "yi(", bang = true }
-  local text = vim.fn.getreg("0")
+  local text = vim.fn.getreg "0"
 
   local first = text:sub(1, 1)
-  local last  = text:sub(-1)
+  local last = text:sub(-1)
   local body = text
   if (first == '"' or first == "'" or first == "`") and first == last then
     body = text:sub(2, -2)
@@ -169,11 +185,11 @@ local function grug_far_root()
 end
 
 local function open_grug_far()
-  require("grug-far").open({
+  require("grug-far").open {
     prefills = {
       paths = grug_far_root(),
     },
-  })
+  }
 end
 
 -- Ctrl+Shift+F — найти и заменить в проекте/папке файла
@@ -193,18 +209,15 @@ map("n", "<leader>sf", function()
   local file = vim.api.nvim_buf_get_name(0)
 
   if file == "" then
-    vim.notify(
-      "Текущий буфер не связан с файлом",
-      vim.log.levels.WARN
-    )
+    vim.notify("Текущий буфер не связан с файлом", vim.log.levels.WARN)
     return
   end
 
-  require("grug-far").open({
+  require("grug-far").open {
     prefills = {
       paths = file,
     },
-  })
+  }
 end, {
   silent = true,
   desc = "Find and replace in current file",
@@ -212,12 +225,12 @@ end, {
 
 -- Space → s → w — подставить слово под курсором
 map("n", "<leader>sw", function()
-  require("grug-far").open({
+  require("grug-far").open {
     prefills = {
-      search = vim.fn.expand("<cword>"),
+      search = vim.fn.expand "<cword>",
       paths = grug_far_root(),
     },
-  })
+  }
 end, {
   silent = true,
   desc = "Replace word under cursor",
@@ -244,10 +257,10 @@ map("n", "<leader>mi", function()
 
   if image.is_enabled() then
     image.disable()
-    vim.notify("Изображения Markdown выключены")
+    vim.notify "Изображения Markdown выключены"
   else
     image.enable()
-    vim.notify("Изображения Markdown включены")
+    vim.notify "Изображения Markdown включены"
   end
 end, {
   silent = true,
@@ -260,3 +273,19 @@ map("n", "<leader>mI", "<cmd>ImageReport<cr>", {
   desc = "Markdown image report",
 })
 
+-- BEGIN persistent floating terminal
+-- Один терминальный буфер и одна сохраняемая shell-сессия.
+local function toggle_persistent_floating_terminal()
+  require("floating_terminal").toggle()
+end
+
+map({ "n", "t" }, "<C-S-t>", toggle_persistent_floating_terminal, {
+  silent = true,
+  desc = "Toggle persistent floating terminal",
+})
+
+map("n", "<leader>tt", toggle_persistent_floating_terminal, {
+  silent = true,
+  desc = "Toggle persistent floating terminal",
+})
+-- END persistent floating terminal
