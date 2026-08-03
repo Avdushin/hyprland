@@ -1,5 +1,5 @@
 return {
-    -- Legacy nvim-treesitter для старого NvChad v2.5.
+  -- Legacy nvim-treesitter для старого NvChad v2.5.
   -- Внутри установлен патч совместимости с Neovim 0.12.
   {
     "nvim-treesitter/nvim-treesitter",
@@ -17,12 +17,12 @@ return {
       require "configs.lspconfig"
     end,
   },
- {
+  {
     "kylechui/nvim-surround",
     version = "*",
     event = "VeryLazy",
     config = function()
-      require("nvim-surround").setup({})
+      require("nvim-surround").setup {}
     end,
   },
   -- === Markdown render (как в Obsidian) ===

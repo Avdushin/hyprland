@@ -5,6 +5,12 @@ require "nvchad.mappings"
 local map = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
+-- Go to definition
+map("n", "gd", vim.lsp.buf.definition, {
+  silent = true,
+  desc = "Go to definition",
+})
+
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jk", "<ESC>")
 
@@ -17,43 +23,16 @@ map("n", "<C-S-i>", function()
 end, { desc = "Format code" })
 
 -- Bottom terminal (Ctrl + `)
+-- Сохраняет shell-сессию и установленную вручную высоту окна.
 map({ "n", "t" }, "<C-`>", function()
-  require("nvchad.term").toggle { id = 1, pos = "sp", size = 0.3 }
-end, { desc = "Bottom terminal" })
+  require("bottom_terminal").toggle()
+end, { desc = "Toggle persistent bottom terminal" })
 
 -- Right terminal (Ctrl + e)
 map({ "n", "t" }, "<C-e>", function()
   require("nvchad.term").toggle { id = 2, pos = "vsp", size = 0.3 }
 end, { desc = "Right terminal" })
 
--- Floating terminal in the center of the current Neovim UI
-local function toggle_floating_terminal()
-  require("nvchad.term").toggle {
-    id = 3,
-    pos = "float",
-    float_opts = {
-      relative = "editor",
-      width = 0.82,
-      height = 0.72,
-      row = 0.12,
-      col = 0.09,
-      border = "rounded",
-    },
-  }
-end
-
--- Работает и из Normal mode, и прямо внутри терминала.
--- Повторное нажатие закрывает это же окно.
-map({ "n", "t" }, "<C-S-t>", toggle_floating_terminal, {
-  silent = true,
-  desc = "Toggle floating terminal",
-})
-
--- Альтернативный вызов из Normal mode: Space -> t -> t.
-map("n", "<leader>tt", toggle_floating_terminal, {
-  silent = true,
-  desc = "Toggle floating terminal",
-})
 
 -- File search like VS Code: Ctrl + P
 map("n", "<C-p>", function()
@@ -72,10 +51,6 @@ for i = 1, 9 do
   end, { desc = "Go to buffer " .. i })
 end
 
-map("n", "<C-n>", function()
-  vim.cmd "enew" -- создать новый пустой буфер
-end, { desc = "New buffer" })
-
 -- New buffer (tab) on Ctrl + N
 map("n", "<C-n>", function()
   vim.cmd "enew"
@@ -84,7 +59,11 @@ end, { desc = "New buffer" })
 -- Close current buffer (tab) on Ctrl + W
 map("n", "<C-w>", function()
   require("nvchad.tabufline").close_buffer()
-end, { desc = "Close buffer" })
+end, {
+  silent = true,
+  nowait = true,
+  desc = "Close current buffer",
+})
 
 -- Copy relative path of current file to clipboard (Alt + Shift + C)
 map("n", "<leader>c", function()
@@ -289,3 +268,20 @@ map("n", "<leader>tt", toggle_persistent_floating_terminal, {
   desc = "Toggle persistent floating terminal",
 })
 -- END persistent floating terminal
+
+-- ============================================================
+-- Find text in current file
+-- ============================================================
+
+-- Normal mode: сразу открыть поиск.
+map("n", "<C-f>", "/", {
+  silent = false,
+  desc = "Find text in current file",
+})
+
+-- Insert / Visual / Select mode:
+-- сначала перейти в Normal mode, затем открыть поиск.
+map({ "i", "x", "s" }, "<C-f>", "<Esc>/", {
+  silent = false,
+  desc = "Find text in current file",
+})

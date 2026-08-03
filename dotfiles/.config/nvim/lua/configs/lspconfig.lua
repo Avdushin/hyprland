@@ -5,7 +5,7 @@ local servers = {
   "html", -- html-lsp
   "cssls", -- css-lsp
 
-  "tsserver", -- TypeScript / JavaScript
+  "ts_ls", -- TypeScript / JavaScript
   "jsonls", -- JSON
   "marksman", -- Markdown
 

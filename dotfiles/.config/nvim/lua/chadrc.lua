@@ -54,6 +54,30 @@ M.base46 = {
   },
 }
 
+local statusline = require "statusline"
+
+M.ui = {
+  statusline = {
+    theme = "vscode_colored",
+    order = {
+      "mode",
+      "file",
+      "git",
+      "%=",
+      "lsp_msg",
+      "%=",
+      "diagnostics",
+      "language",
+      "cursor",
+      "cwd",
+    },
+    modules = {
+      diagnostics = statusline.diagnostics,
+      language = statusline.language,
+    },
+  },
+}
+
 return M
 
 -- -- This file needs to have same structure as nvconfig.lua

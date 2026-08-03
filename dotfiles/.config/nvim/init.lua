@@ -52,6 +52,8 @@ require "notes"
 
 vim.schedule(function()
   require "mappings"
+  require "russian_keymap"
+  require "visual_surround"
 end)
 
 -- vim.g.base46_cache = vim.fn.stdpath "data" .. "/base46/"
