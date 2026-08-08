@@ -11,7 +11,8 @@ local servers = {
 
   "rust_analyzer", -- Rust
   "gopls", -- Go
-  "pyright", -- Python (если пользуешь)
+  "pyright", -- Python
+  "emmet_language_server", -- Emmet 
 }
 
 vim.lsp.enable(servers)

@@ -285,3 +285,44 @@ map({ "i", "x", "s" }, "<C-f>", "<Esc>/", {
   silent = false,
   desc = "Find text in current file",
 })
+
+-- ============================================================
+-- Window splits
+-- ============================================================
+
+map("n", "<leader>v", "<cmd>vsplit<CR>", {
+  desc = "Vertical split",
+})
+
+map("n", "<leader>h", "<cmd>split<CR>", {
+  desc = "Horizontal split",
+})
+
+-- Resize splits
+map("n", "<leader><Right>", "<cmd>vertical resize +5<CR>", {
+  desc = "Increase window width",
+})
+
+map("n", "<leader><Left>", "<cmd>vertical resize -5<CR>", {
+  desc = "Decrease window width",
+})
+
+map("n", "<leader><Down>", "<cmd>resize +3<CR>", {
+  desc = "Increase window height",
+})
+
+map("n", "<leader><Up>", "<cmd>resize -3<CR>", {
+  desc = "Decrease window height",
+})
+
+map("n", "<leader>=", "<cmd>wincmd =<CR>", {
+  desc = "Equalize splits",
+})
+
+-- ============================================================
+-- Save
+-- ============================================================
+
+map({ "n", "i" }, "<C-s>", "<cmd>w<CR>", {
+  desc = "Save file",
+})

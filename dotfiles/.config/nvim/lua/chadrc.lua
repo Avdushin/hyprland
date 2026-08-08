@@ -3,7 +3,7 @@ local M = {}
 
 M.base46 = {
   theme = "fog-and-ember",
-  theme_toggle = { "fog-and-ember", "gruvbox" },
+  theme_toggle = { "fog-and-ember|gruvbox", "gruvbox" },
   transparency = true,
 
   hl_override = {
@@ -80,6 +80,44 @@ M.ui = {
 
 return M
 
+-- Non-opacity background 
+-- ---@type ChadrcConfig
+-- local M = {}
+--
+-- M.base46 = {
+--   theme = "fog-and-ember",
+--   theme_toggle = { "fog-and-ember|gruvbox", "gruvbox" },
+--   transparency = false,
+--   },
+-- }
+--
+-- local statusline = require "statusline"
+--
+-- M.ui = {
+--   statusline = {
+--     theme = "vscode_colored",
+--     order = {
+--       "mode",
+--       "file",
+--       "git",
+--       "%=",
+--       "lsp_msg",
+--       "%=",
+--       "diagnostics",
+--       "language",
+--       "cursor",
+--       "cwd",
+--     },
+--     modules = {
+--       diagnostics = statusline.diagnostics,
+--       language = statusline.language,
+--     },
+--   },
+-- }
+--
+-- return M
+
+-- -- ======================================== Default ===============================================
 -- -- This file needs to have same structure as nvconfig.lua
 -- -- https://github.com/NvChad/ui/blob/v3.0/lua/nvconfig.lua
 -- -- Please read that file to know all available options :(
