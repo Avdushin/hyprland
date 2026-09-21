@@ -30,9 +30,11 @@ done < <(
 echo 'Checking required files...'
 
 required_files=(
+    .gitmodules
     dotfiles/.gitconfig
     docs/GIT.md
     scripts/install-git-tools.sh
+    scripts/update-nvim.sh
     dotfiles/.config/hypr/palette.conf
     dotfiles/.config/hypr/scripts/launch-waybar.sh
     dotfiles/.config/hypr/scripts/wifi-menu.sh
@@ -66,14 +68,29 @@ legacy_waybar="dotfiles/.config/waybar/config.jsonc"
     fail "legacy Waybar config remains: $legacy_waybar"
 }
 
-for legacy in dotfiles/.config/nvim dotfiles/.local/bin/nvchad; do
-    [[ ! -e "$legacy" ]] || fail "legacy Neovim/NvChad path remains: $legacy"
-done
+[[ ! -e dotfiles/.local/bin/nvchad ]] ||
+    fail 'legacy NvChad launcher remains: dotfiles/.local/bin/nvchad'
 
-if grep -qxF '.config/nvim' managed-paths.txt ||
-   grep -qxF '.local/bin/nvchad' managed-paths.txt; then
-    fail 'managed-paths.txt still owns legacy Neovim/NvChad paths'
+grep -qxF '.config/nvim' managed-paths.txt ||
+    fail 'managed-paths.txt does not back up ~/.config/nvim'
+
+if grep -qxF '.local/bin/nvchad' managed-paths.txt; then
+    fail 'managed-paths.txt still owns the legacy NvChad launcher'
 fi
+
+echo 'Checking Neovim submodule...'
+
+[[ "$(git config -f .gitmodules --get 'submodule.dotfiles/.config/nvim.path')" == 'dotfiles/.config/nvim' ]] ||
+    fail 'unexpected Neovim submodule path'
+
+[[ "$(git config -f .gitmodules --get 'submodule.dotfiles/.config/nvim.url')" == '../nvchad-rc.git' ]] ||
+    fail 'unexpected Neovim submodule URL'
+
+[[ "$(git config -f .gitmodules --get 'submodule.dotfiles/.config/nvim.branch')" == 'main' ]] ||
+    fail 'Neovim submodule does not track main for explicit updates'
+
+[[ "$(git ls-files --stage dotfiles/.config/nvim | awk '{print $1}')" == '160000' ]] ||
+    fail 'dotfiles/.config/nvim is not stored as a Git submodule'
 
 echo 'Checking executable files...'
 
@@ -81,6 +98,7 @@ executable_files=(
     install.sh
     scripts/check-repo.sh
     scripts/install-git-tools.sh
+    scripts/update-nvim.sh
     scripts/doctor.sh
     dotfiles/.config/hypr/scripts/launch-waybar.sh
     dotfiles/.config/hypr/scripts/wifi-menu.sh

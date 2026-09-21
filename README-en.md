@@ -22,6 +22,7 @@ or Thunar preinstalled.
 - screenshots with Grim, Slurp and wl-clipboard;
 - clipboard history with Cliphist;
 - Git/GitHub tooling: an anonymized `.gitconfig`, `delta`, `diffnav`, `tuicr`, `gh` and OpenSSH;
+- Neovim configuration from `Avdushin/nvchad-rc`, pinned as a Git submodule;
 - PipeWire controls, NetworkManager and Bluetooth widgets;
 - GTK, icon, terminal and launcher colors generated from one **Fog & Ember**
   palette;
@@ -33,7 +34,7 @@ personal applications are deliberately not managed.
 ## Install
 
 ```bash
-git clone https://github.com/Avdushin/hyprland.git
+git clone --recurse-submodules https://github.com/Avdushin/hyprland.git
 cd hyprland
 ./install.sh
 ```
@@ -42,12 +43,13 @@ The installer:
 
 1. detects the supported distribution family;
 2. installs required packages;
-3. preserves personal `user.*` / `credential.*` values from an existing `~/.gitconfig` in `~/.gitconfig.local` when needed;
-4. backs up existing managed configuration;
-5. installs dotfiles and wallpapers;
-6. generates theme fragments;
-7. enables relevant services;
-8. runs diagnostics.
+3. initializes the pinned Neovim submodule;
+4. preserves personal `user.*` / `credential.*` values from an existing `~/.gitconfig` in `~/.gitconfig.local` when needed;
+5. backs up existing managed configuration, including `~/.config/nvim`;
+6. fully replaces the previous `~/.config/nvim` with the pinned submodule contents and installs the remaining dotfiles;
+7. installs wallpapers and generates theme fragments;
+8. enables relevant services;
+9. runs diagnostics.
 
 Log out afterward and choose **Hyprland** in the display manager.
 
@@ -100,16 +102,28 @@ See [monitor documentation](docs/MONITORS.md).
 
 ```bash
 git pull --ff-only
+git submodule update --init --recursive
 ./install.sh
 ```
 
 A new dated backup is created every time.
 
+Advance the pinned Neovim version to the current `nvchad-rc/main` explicitly:
+
+```bash
+./scripts/update-nvim.sh
+git diff --submodule=log -- dotfiles/.config/nvim
+git add dotfiles/.config/nvim
+git commit -m "chore: update Neovim submodule"
+```
+
+The normal `./install.sh` deliberately does not track the remote branch automatically, so a specific Fog & Ember commit stays reproducible.
+
 ## Documentation
 
 - [Key bindings](docs/KEYBINDS.md)
 - [Git and terminal tooling](docs/GIT.md)
-- [Neovim (separate repository)](docs/NVIM.md)
+- [Neovim submodule](docs/NVIM.md)
 - [Monitor setup](docs/MONITORS.md)
 - [Distribution support](docs/DISTRIBUTIONS.md)
 - [Customization](docs/CUSTOMIZATION.md)

@@ -12,3 +12,4 @@
 .config/systemd/user/waybar-fog-and-ember.service
 .local/share/fog-and-ember
 .gitconfig
+.config/nvim

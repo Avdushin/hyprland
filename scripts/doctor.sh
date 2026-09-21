@@ -97,6 +97,7 @@ note 'Configuration files'
 
 required_files=(
     "$HOME/.gitconfig"
+    "$config_home/nvim/init.lua"
     "$hypr_dir/hyprland.lua"
     "$hypr_dir/palette.conf"
     "$hypr_dir/generated-theme.lua"
@@ -127,6 +128,20 @@ for file in "${required_files[@]}"; do
         bad "missing: $file"
     fi
 done
+
+note 'Neovim configuration'
+
+if [[ -e "$config_home/nvim/.git" ]]; then
+    bad 'submodule Git metadata was copied into ~/.config/nvim'
+else
+    ok 'Neovim config contains no submodule Git metadata'
+fi
+
+if command -v nvim >/dev/null 2>&1; then
+    ok "nvim: $(nvim --version | head -n 1)"
+else
+    soft 'nvim binary is not installed; use the standalone nvchad-rc installer if needed'
+fi
 
 note 'Git tooling'
 

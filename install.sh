@@ -4,6 +4,9 @@ set -Eeuo pipefail
 script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 source "$script_dir/scripts/lib.sh"
 
+nvim_submodule_rel="dotfiles/.config/nvim"
+nvim_submodule="$script_dir/$nvim_submodule_rel"
+
 install_packages=true
 run_doctor=true
 dry_run=false
@@ -57,7 +60,9 @@ preserve_gitconfig_local() {
   fi
 
   entries="$(
-    git config --file "$managed"       --get-regexp '^(user\.|credential\.)'       2>/dev/null || true
+    git config --file "$managed" \
+      --get-regexp '^(user\.|credential\.)' \
+      2>/dev/null || true
   )"
 
   [[ -n "$entries" ]] || return
@@ -70,6 +75,35 @@ preserve_gitconfig_local() {
   done <<<"$entries"
 
   note "Preserved personal Git identity/credential settings in ~/.gitconfig.local"
+}
+
+
+prepare_nvim_submodule() {
+  command -v git >/dev/null 2>&1 ||
+    die 'git is required to initialize the Neovim submodule'
+
+  [[ -d "$script_dir/.git" || -f "$script_dir/.git" ]] ||
+    die 'Fog & Ember must be installed from a Git checkout so the pinned Neovim submodule can be resolved'
+
+  note 'Preparing pinned Neovim configuration'
+
+  git -C "$script_dir" submodule sync -- "$nvim_submodule_rel"
+  git -C "$script_dir" submodule update \
+    --init \
+    --recursive \
+    --depth 1 \
+    -- "$nvim_submodule_rel"
+
+  local expected actual dirty
+  expected="$(git -C "$script_dir" rev-parse "HEAD:$nvim_submodule_rel")"
+  actual="$(git -C "$nvim_submodule" rev-parse HEAD)"
+  dirty="$(git -C "$nvim_submodule" status --porcelain --untracked-files=all)"
+
+  [[ "$actual" == "$expected" ]] ||
+    die "Neovim submodule mismatch: expected $expected, found $actual"
+
+  [[ -z "$dirty" ]] ||
+    die 'Neovim submodule has local changes. Commit/stash them in nvchad-rc or clean the submodule before installing.'
 }
 
 family=$(detect_family)
@@ -85,6 +119,7 @@ if $dry_run; then
   else
     note 'Package installation disabled'
   fi
+  note "Would initialize pinned Neovim submodule: $nvim_submodule_rel"
   note 'Dry run completed; no files were changed'
   exit 0
 fi
@@ -101,14 +136,20 @@ if $install_packages; then
     || warn 'Could not enable Bluetooth automatically'
 fi
 
+prepare_nvim_submodule
 preserve_gitconfig_local
 
 note 'Creating a backup'
 backup=$("$script_dir/scripts/backup.sh")
 printf 'Backup: %s\n' "$backup"
 
+note 'Replacing Neovim configuration from the pinned submodule'
+rm -rf -- "$HOME/.config/nvim"
+
 note 'Installing dotfiles'
-rsync -a -- "$script_dir/dotfiles/" "$HOME/"
+rsync -a \
+  --exclude='.git' \
+  -- "$script_dir/dotfiles/" "$HOME/"
 
 # Remove files used by older static Waybar builds. The current profile is
 # rendered into XDG_RUNTIME_DIR from config.template.json.

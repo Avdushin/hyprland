@@ -23,6 +23,7 @@
 * создание скриншотов с помощью Grim, Slurp и wl-clipboard;
 * история буфера обмена через Cliphist;
 * Git/GitHub tooling: обезличенный `.gitconfig`, `delta`, `diffnav`, `tuicr`, `gh` и OpenSSH;
+* конфигурация Neovim из `Avdushin/nvchad-rc`, зафиксированная как Git submodule;
 * управление PipeWire, виджеты NetworkManager и Bluetooth;
 * единая палитра **Fog & Ember**, из которой генерируются цвета GTK, иконок, терминала, лаунчеров и других компонентов;
 * резервное копирование, восстановление и диагностика.
@@ -32,7 +33,7 @@
 ## Установка
 
 ```bash
-git clone https://github.com/Avdushin/hyprland.git
+git clone --recurse-submodules https://github.com/Avdushin/hyprland.git
 cd hyprland
 ./install.sh
 ```
@@ -41,12 +42,13 @@ cd hyprland
 
 1. определяет поддерживаемое семейство дистрибутива;
 2. устанавливает необходимые пакеты;
-3. сохраняет персональные `user.*` / `credential.*` из существующего `~/.gitconfig` в `~/.gitconfig.local`, если это необходимо;
-4. создаёт резервную копию существующих управляемых конфигураций;
-5. устанавливает dotfiles и обои;
-6. генерирует файлы цветовой темы;
-7. включает необходимые службы;
-8. запускает диагностику.
+3. инициализирует зафиксированный Neovim submodule;
+4. сохраняет персональные `user.*` / `credential.*` из существующего `~/.gitconfig` в `~/.gitconfig.local`, если это необходимо;
+5. создаёт резервную копию существующих управляемых конфигураций, включая `~/.config/nvim`;
+6. полностью заменяет старый `~/.config/nvim` содержимым pinned submodule и устанавливает остальные dotfiles;
+7. устанавливает обои и генерирует файлы цветовой темы;
+8. включает необходимые службы;
+9. запускает диагностику.
 
 После установки выйдите из текущей сессии и выберите **Hyprland** в менеджере входа.
 
@@ -95,16 +97,28 @@ cp ~/.config/hypr/monitors/local.lua.example \
 
 ```bash
 git pull --ff-only
+git submodule update --init --recursive
 ./install.sh
 ```
 
 При каждом запуске создаётся новая резервная копия с датой и временем.
 
+Обновление pinned-версии Neovim до актуального `nvchad-rc/main` выполняется отдельно:
+
+```bash
+./scripts/update-nvim.sh
+git diff --submodule=log -- dotfiles/.config/nvim
+git add dotfiles/.config/nvim
+git commit -m "chore: update Neovim submodule"
+```
+
+Обычный `./install.sh` намеренно не двигает submodule на новый commit автоматически: это сохраняет воспроизводимость конкретного состояния Fog & Ember.
+
 ## Документация
 
 * [Горячие клавиши](docs/KEYBINDS.md)
 * [Git и terminal tooling](docs/GIT.md)
-* [Neovim (отдельный репозиторий)](docs/NVIM.md)
+* [Neovim submodule](docs/NVIM.md)
 * [Настройка мониторов](docs/MONITORS.md)
 * [Поддержка дистрибутивов](docs/DISTRIBUTIONS.md)
 * [Настройка и персонализация](docs/CUSTOMIZATION.md)

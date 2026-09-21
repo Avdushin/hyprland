@@ -1,0 +1,4 @@
+[submodule "dotfiles/.config/nvim"]
+	path = dotfiles/.config/nvim
+	url = ../nvchad-rc.git
+	branch = main
