@@ -58,6 +58,12 @@ required_commands=(
     flock
     playerctl
     bluetoothctl
+    git
+    ssh
+    gh
+    delta
+    diffnav
+    tuicr
     btop
     calcurse
 )
@@ -90,6 +96,7 @@ done
 note 'Configuration files'
 
 required_files=(
+    "$HOME/.gitconfig"
     "$hypr_dir/hyprland.lua"
     "$hypr_dir/palette.conf"
     "$hypr_dir/generated-theme.lua"
@@ -120,6 +127,33 @@ for file in "${required_files[@]}"; do
         bad "missing: $file"
     fi
 done
+
+note 'Git tooling'
+
+if [[ "$(git config --global --get init.defaultBranch 2>/dev/null || true)" == main ]]; then
+    ok 'Git default branch: main'
+else
+    bad 'Git default branch is not main'
+fi
+
+if [[ "$(git config --global --get core.pager 2>/dev/null || true)" == delta ]]; then
+    ok 'Git core pager: delta'
+else
+    bad 'Git core pager is not delta'
+fi
+
+if [[ "$(git config --global --get pager.diff 2>/dev/null || true)" == diffnav ]]; then
+    ok 'Git diff pager: diffnav'
+else
+    bad 'Git diff pager is not diffnav'
+fi
+
+if [[ -n "$(git config --global --get user.name 2>/dev/null || true)" &&
+      -n "$(git config --global --get user.email 2>/dev/null || true)" ]]; then
+    ok 'Personal Git identity is configured'
+else
+    soft 'Git user.name/user.email are not configured in ~/.gitconfig.local'
+fi
 
 legacy_waybar="$waybar_dir/config.jsonc"
 

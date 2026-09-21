@@ -73,6 +73,14 @@ xdg-utils
 xdg-user-dirs
 dbus
 
+# Git and terminal developer tooling
+openssh
+less
+github-cli
+git-delta
+diffnav
+tuicr
+
 # Waybar utilities used by the Fog & Ember profile
 btop
 calcurse

@@ -36,6 +36,42 @@ done
 
 [[ $EUID -ne 0 ]] || die 'Run this installer as a regular user, not root'
 
+preserve_gitconfig_local() {
+  local managed="$HOME/.gitconfig"
+  local private="$HOME/.gitconfig.local"
+  local marker="# Managed by Avdushin/hyprland."
+  local entries=""
+
+  [[ -f "$managed" ]] || return
+  [[ ! -e "$private" ]] || return
+  grep -Fqx "$marker" "$managed" 2>/dev/null && return
+
+  if ! command -v git >/dev/null 2>&1; then
+    warn "git is unavailable; the existing ~/.gitconfig will still be backed up, but personal values cannot be migrated automatically"
+    return
+  fi
+
+  if ! git config --file "$managed" --list >/dev/null 2>&1; then
+    warn "Existing ~/.gitconfig could not be parsed; it will still be preserved in the installer backup"
+    return
+  fi
+
+  entries="$(
+    git config --file "$managed"       --get-regexp '^(user\.|credential\.)'       2>/dev/null || true
+  )"
+
+  [[ -n "$entries" ]] || return
+
+  : >"$private"
+
+  while IFS=' ' read -r key value; do
+    [[ -n "$key" ]] || continue
+    git config --file "$private" --add "$key" "${value:-}"
+  done <<<"$entries"
+
+  note "Preserved personal Git identity/credential settings in ~/.gitconfig.local"
+}
+
 family=$(detect_family)
 if $install_packages && [[ $family == unsupported ]]; then
   die 'Automatic package installation supports Arch Linux, EndeavourOS, Manjaro and Fedora. Use --dotfiles-only on other distributions.'
@@ -45,6 +81,7 @@ if $dry_run; then
   note "Detected package family: $family"
   if $install_packages; then
     FOG_EMBER_DRY_RUN=1 "$script_dir/scripts/install-packages.sh" "$family"
+    FOG_EMBER_DRY_RUN=1 "$script_dir/scripts/install-git-tools.sh"
   else
     note 'Package installation disabled'
   fi
@@ -55,6 +92,7 @@ fi
 if $install_packages; then
   command -v sudo >/dev/null 2>&1 || die 'sudo is required to install packages'
   "$script_dir/scripts/install-packages.sh" "$family"
+  "$script_dir/scripts/install-git-tools.sh"
 
   note 'Enabling desktop services'
   sudo systemctl enable --now NetworkManager.service >/dev/null 2>&1 \
@@ -62,6 +100,8 @@ if $install_packages; then
   sudo systemctl enable --now bluetooth.service >/dev/null 2>&1 \
     || warn 'Could not enable Bluetooth automatically'
 fi
+
+preserve_gitconfig_local
 
 note 'Creating a backup'
 backup=$("$script_dir/scripts/backup.sh")

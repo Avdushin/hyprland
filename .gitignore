@@ -22,3 +22,6 @@ dotfiles/.config/hypr/user/local.lua
 dotfiles/.config/hypr/monitors/local.lua
 *.pyc
 dotfiles/.config/hypr/user-settings.sh
+
+# Personal Git identity and credentials are never versioned.
+dotfiles/.gitconfig.local

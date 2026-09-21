@@ -21,6 +21,7 @@ or Thunar preinstalled.
 - Hyprlock and Hypridle;
 - screenshots with Grim, Slurp and wl-clipboard;
 - clipboard history with Cliphist;
+- Git/GitHub tooling: an anonymized `.gitconfig`, `delta`, `diffnav`, `tuicr`, `gh` and OpenSSH;
 - PipeWire controls, NetworkManager and Bluetooth widgets;
 - GTK, icon, terminal and launcher colors generated from one **Fog & Ember**
   palette;
@@ -41,11 +42,12 @@ The installer:
 
 1. detects the supported distribution family;
 2. installs required packages;
-3. backs up existing managed configuration;
-4. installs dotfiles and wallpapers;
-5. generates theme fragments;
-6. enables relevant services;
-7. runs diagnostics.
+3. preserves personal `user.*` / `credential.*` values from an existing `~/.gitconfig` in `~/.gitconfig.local` when needed;
+4. backs up existing managed configuration;
+5. installs dotfiles and wallpapers;
+6. generates theme fragments;
+7. enables relevant services;
+8. runs diagnostics.
 
 Log out afterward and choose **Hyprland** in the display manager.
 
@@ -106,7 +108,8 @@ A new dated backup is created every time.
 ## Documentation
 
 - [Key bindings](docs/KEYBINDS.md)
-- [Neovim / NvChad](docs/NVIM.md)
+- [Git and terminal tooling](docs/GIT.md)
+- [Neovim (separate repository)](docs/NVIM.md)
 - [Monitor setup](docs/MONITORS.md)
 - [Distribution support](docs/DISTRIBUTIONS.md)
 - [Customization](docs/CUSTOMIZATION.md)

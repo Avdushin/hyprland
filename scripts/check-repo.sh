@@ -30,6 +30,9 @@ done < <(
 echo 'Checking required files...'
 
 required_files=(
+    dotfiles/.gitconfig
+    docs/GIT.md
+    scripts/install-git-tools.sh
     dotfiles/.config/hypr/palette.conf
     dotfiles/.config/hypr/scripts/launch-waybar.sh
     dotfiles/.config/hypr/scripts/wifi-menu.sh
@@ -63,11 +66,21 @@ legacy_waybar="dotfiles/.config/waybar/config.jsonc"
     fail "legacy Waybar config remains: $legacy_waybar"
 }
 
+for legacy in dotfiles/.config/nvim dotfiles/.local/bin/nvchad; do
+    [[ ! -e "$legacy" ]] || fail "legacy Neovim/NvChad path remains: $legacy"
+done
+
+if grep -qxF '.config/nvim' managed-paths.txt ||
+   grep -qxF '.local/bin/nvchad' managed-paths.txt; then
+    fail 'managed-paths.txt still owns legacy Neovim/NvChad paths'
+fi
+
 echo 'Checking executable files...'
 
 executable_files=(
     install.sh
     scripts/check-repo.sh
+    scripts/install-git-tools.sh
     scripts/doctor.sh
     dotfiles/.config/hypr/scripts/launch-waybar.sh
     dotfiles/.config/hypr/scripts/wifi-menu.sh
@@ -145,6 +158,20 @@ if ("theme", "fog-and-ember") not in config:
 
 ET.parse("dotfiles/.config/Thunar/uca.xml")
 PY_GHOSTTY
+
+echo 'Checking Git configuration...'
+
+git config --file dotfiles/.gitconfig --list >/dev/null ||
+    fail 'invalid dotfiles/.gitconfig'
+
+grep -qF 'path = ~/.gitconfig.local' dotfiles/.gitconfig ||
+    fail 'managed Git config does not include ~/.gitconfig.local'
+
+if git config --file dotfiles/.gitconfig \
+    --get-regexp '^(user\.|credential\.)' \
+    >/dev/null 2>&1; then
+    fail 'personal Git identity or credential helper found in managed .gitconfig'
+fi
 
 echo 'Checking Python syntax...'
 
@@ -338,12 +365,12 @@ done
 
 echo 'Checking package dependencies...'
 
-for package in ghostty btop calcurse iproute2; do
+for package in ghostty btop calcurse iproute2 openssh less github-cli git-delta diffnav tuicr; do
     grep -qxF "$package" packages/arch.txt ||
         fail "missing Arch package: $package"
 done
 
-for package in ghostty btop calcurse iproute; do
+for package in ghostty btop calcurse iproute openssh-clients less gh git-delta diffnav tuicr; do
     grep -qxF "$package" packages/fedora.txt ||
         fail "missing Fedora package: $package"
 done

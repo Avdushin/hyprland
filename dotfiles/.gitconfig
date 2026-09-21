@@ -1,0 +1,54 @@
+# Managed by Avdushin/hyprland.
+# Keep identity, credentials and machine-specific overrides in ~/.gitconfig.local.
+
+[init]
+    defaultBranch = main
+
+[fetch]
+    prune = true
+
+[branch]
+    sort = -committerdate
+
+[tag]
+    sort = version:refname
+
+[column]
+    ui = auto
+
+# Always use SSH for github.com remotes.
+[url "git@github.com:"]
+    insteadOf = https://github.com/
+
+[core]
+    editor = nvim
+    pager = delta
+
+[sequence]
+    editor = nvim
+
+[delta]
+    navigate = true
+    line-numbers = true
+
+# Use the TUI specifically for `git diff`.
+[pager]
+    diff = diffnav
+
+[diff]
+    algorithm = histogram
+    colorMoved = default
+
+[merge]
+    conflictStyle = zdiff3
+
+[rerere]
+    enabled = true
+    autoupdate = true
+
+[interactive]
+    diffFilter = delta --color-only
+
+# Loaded last so local identity/credentials and explicit machine overrides win.
+[include]
+    path = ~/.gitconfig.local
